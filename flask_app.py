@@ -4,7 +4,6 @@
 #(c) Peter Munk 2020
 
 import os
-import gevent
 from flask import Flask, request
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
@@ -31,33 +30,25 @@ def connect():
 @socketio.on('getWord')
 def getWord(data):
     time = data["time"]
-    gevent.sleep(0.1)
     print('received time: ' + str(time))
-    gevent.sleep(0.1)
     if ds.isEmpty():
-        gevent.sleep(0.1)
         emit('resetRequired', broadcast=True)
     else:
         word = ds.getRandomElement()        
-        gevent.sleep(0.1)
         emit('word', (word, time), broadcast=False)
-        gevent.sleep(0.1)
         emit('guess', time, broadcast=True, include_self=False)
 
 @socketio.on('reset')
 def reset():
     ds.reset()
-    gevent.sleep(0.1)
     emit('resetPerformed', broadcast=True)
 
 @socketio.on('disconnect')
 def disconnect():
     print('Client disconnected: '+str(request.sid))
-    gevent.sleep(0.1)
 
 #Not called by pythonanywhere!     
 if __name__ == '__main__':
     #ds = DataStore()
     #app.run()
     socketio.run(app)
-    
