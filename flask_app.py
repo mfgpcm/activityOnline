@@ -13,8 +13,7 @@ socketio = SocketIO(app, cors_allowed_origins='*') #, logger=True, engineio_logg
 
 #TODO get word list from client
 #Add sessions for users to start in individual rooms!
-
-ds = DataStore
+ds = DataStore()
 
 @app.route("/")
 def welcome():
@@ -43,9 +42,10 @@ def reset():
 @socketio.on('disconnect')
 def disconnect():
     print('Client disconnected: '+str(request.sid))
-       
+
+#Not called by pythonanywhere!     
 if __name__ == '__main__':
-    ds = DataStore()
+    #ds = DataStore()
     #app.run()
     socketio.run(app)
     
