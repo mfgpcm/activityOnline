@@ -1,4 +1,4 @@
-# activityBackend
+# Activity Backend
 
 This is a pyhton flask socketio API that is supposed to run at https://activity-backend.herokuapp.com.
 The frontend is hosted as github.io page at https://mfgpcm.github.io.
