@@ -9,7 +9,7 @@ app = Flask(__name__)
 #app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'adfpoihq34trihu34g9uph'
 cors = CORS(app)
-socketio = SocketIO(app, cors_allowed_origins='*') #, logger=True, engineio_logger=True)
+socketio = SocketIO(app, cors_allowed_origins='*', ping_interval = (25, 25), ping_timeout = 15, ) #, logger=True, engineio_logger=True)
 
 #TODO get word list from client
 #Add sessions for users to start in individual rooms!
