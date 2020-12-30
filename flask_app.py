@@ -10,7 +10,7 @@ from flask_socketio import SocketIO, emit
 from dataStore import DataStore
 
 app = Flask(__name__)
-#app.config['DEBUG'] = True
+app.debug = 'DEBUG' in os.environ
 app.config['SECRET_KEY'] = 'adfpoihq34trihu34g9uph'
 cors = CORS(app)
 socketio = SocketIO(app, cors_allowed_origins='*', ping_interval = (25, 25), ping_timeout = 15, ) #, logger=True, engineio_logger=True)
