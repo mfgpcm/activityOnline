@@ -8,7 +8,10 @@ class DataStore:
 
     def __init__(self):
         self.reset()
-        
+    
+    def isEmpty(self):
+        return not self.data
+    
     def getRandomElement(self):
         if not self.data:
            return "[Empty]"
