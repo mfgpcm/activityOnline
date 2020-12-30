@@ -1,6 +1,6 @@
 # inspired by https://towardsdatascience.com/build-a-simple-web-app-with-github-pages-flask-and-heroku-bcb2dacc8331
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from dataStore import DataStore
@@ -20,29 +20,29 @@ ds = DataStore
 def welcome():
     return (f"Activity API<br>")
         
-@socketio.on('connect', namespace='/messages')
+@socketio.on('connect')
 def connect():
-    print('Client connected')
+    print('Client connected: '+str(request.sid))
         
-@socketio.on('getWord', namespace='/messages')
+@socketio.on('getWord')
 def getWord(data):
     time = data["time"]
     print('received time: ' + str(time))
     if ds.isEmpty():
-        socketio.emit('resetRequired', namespace='/messages', broadcast=True)
+        emit('resetRequired', broadcast=True)
     else:
         word = ds.getRandomElement()        
-        socketio.emit('guess', time, namespace='/messages', broadcast=True)
-        socketio.emit('word', word, namespace='/messages')
+        emit('word', (word, time), broadcast=False)
+        emit('guess', time, broadcast=True, include_self=False)
 
-@socketio.on('reset', namespace='/messages')
+@socketio.on('reset')
 def reset():
     ds.reset()
-    socketio.emit('resetPerformed', namespace='/messages', broadcast=True)
+    emit('resetPerformed', broadcast=True)
 
-@socketio.on('disconnect', namespace='/messages')
+@socketio.on('disconnect')
 def disconnect():
-    print('Client disconnected')
+    print('Client disconnected: '+str(request.sid))
        
 if __name__ == '__main__':
     ds = DataStore()
