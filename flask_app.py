@@ -30,7 +30,7 @@ def connect():
 @socketio.on('getWord')
 def getWord(data):
     time = data["time"]
-     gevent.sleep(0.1)
+    gevent.sleep(0.1)
     print('received time: ' + str(time))
     gevent.sleep(0.1)
     if ds.isEmpty():
