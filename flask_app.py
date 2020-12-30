@@ -1,4 +1,8 @@
 # inspired by https://towardsdatascience.com/build-a-simple-web-app-with-github-pages-flask-and-heroku-bcb2dacc8331
+#and https://medium.com/the-andela-way/deploying-a-python-flask-app-to-heroku-41250bda27d0
+
+#(c) Peter Munk 2020
+
 
 from flask import Flask, request
 from flask_cors import CORS

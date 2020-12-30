@@ -1,3 +1,5 @@
+#(c) Peter Munk 2020
+
 import csv
 import random
 import itertools
