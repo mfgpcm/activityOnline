@@ -3,8 +3,9 @@ var socket = io.connect('http://localhost:5000');
 //var socket = io.connect('https://activity-backend.herokuapp.com/');
 
 function createRoom(guessTime) {
-	socket.emit('join', {room: 'asdf'});
-	console.log("Created room asdf");
+    var roomName = $(" #roomName ").val();
+  	console.log("Created room " + roomName);
+	socket.emit('join', {room: roomName});
 }
 	
 function showNewWord(guessTime) {
@@ -40,8 +41,8 @@ socket.on('guess', function(time) {
 });
 
 socket.on('word', function(word, time) {
-	console.log("Received word:" + word );
-	console.log("Received time:" + time );
+	console.log("Received word: " + word );
+	console.log("Received time: " + time );
 	newLimit(time);
 	startTimer();
 	disableAllBtn();
@@ -60,8 +61,8 @@ socket.on('resetRequired', function() {
 	disableAllBtn();
 });
 
-$(" #btn_room ").click(function() { createRoom();});
-$(" #btn_explain ").click(function() { showNewWord(15);});
+$(" #btn_room ").click(function() {createRoom();});
+$(" #btn_explain ").click(function() {showNewWord(15);});
 $(" #btn_draw ").click(function() {showNewWord(30);});
 $(" #btn_pantomime ").click(function() {showNewWord(60);});
 $(" #btn_reset ").click(function() {handleReset();});

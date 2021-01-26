@@ -22,13 +22,13 @@ ds = DataStore()
 
 @app.route("/")
 def welcome():
-    return render_template('index.html', room_name_suggest=generate_slug())
+    return render_template('index.html', room_name_suggest=generate_slug(2))
 #    return (f"Activity API<br>")
     
-@app.route('/path/<string:roomName>')
+@app.route('/<string:roomName>')
 def enter_room(roomName):
-    # show the subpath after /path/
-    return 'Subpath %s' % escape(roomName)
+    print('Joined room', roomName)
+    return(f"Room"+roomName+"<br>")
         
 @socketio.on('connect')
 def connect():
