@@ -4,9 +4,10 @@
 #(c) Peter Munk 2020
 
 import os
-from flask import Flask, request
+from coolname import generate_slug
+from flask import Flask, request, render_template
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from dataStore import DataStore
 
 app = Flask(__name__)
@@ -21,11 +22,29 @@ ds = DataStore()
 
 @app.route("/")
 def welcome():
-    return (f"Activity API<br>")
+    return render_template('index.html', room_name_suggest=generate_slug())
+#    return (f"Activity API<br>")
+    
+@app.route('/path/<string:roomName>')
+def enter_room(roomName):
+    # show the subpath after /path/
+    return 'Subpath %s' % escape(roomName)
         
 @socketio.on('connect')
 def connect():
     print('Client connected: '+str(request.sid))
+    
+@socketio.on('join')
+def on_join(data):
+    roomName = data['room']
+    join_room(roomName)
+    print('Entered the room', roomName)
+
+@socketio.on('leave')
+def on_leave(data):
+    roomName = data['room']
+    leave_room(roomName)
+    print('left the room.', roomName)
         
 @socketio.on('getWord')
 def getWord(data):
@@ -47,8 +66,6 @@ def reset():
 def disconnect():
     print('Client disconnected: '+str(request.sid))
 
-#Not called by pythonanywhere!     
+#Not called by heroku
 if __name__ == '__main__':
-    #ds = DataStore()
-    #app.run()
     socketio.run(app)

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+
+	<!-- Countdown Timer Default Style -->
+	<link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet">     
+
+    <title>2020 Activity</title>
+  </head>
+  <body>
+	<div class="jumbotron-narrow text-center">
+	<h2>Silvester 2020 Activity</h2>
+	<div class="form-inline">
+        <div class="form-group mb-2">
+            <label for="roomName" class="sr-only">Room name</label>
+            <input type="text" class="form-control" id="roomName" value="{{ room_name_suggest }}">
+        </div>
+        <button class="btn btn-primary mb-2" id="btn_room" type="button" >Create Room</button>
+    </div>
+	<p />
+	<h1 id="word">Click to get a word</h1>
+	<p />
+	<button class="btn btn-primary btn-lg" id="btn_explain" type="button" >Explain (15 sec)</button>
+	<button class="btn btn-primary btn-lg" id="btn_draw" type="button" >Draw (30 sec)</button>
+	<button class="btn btn-primary btn-lg" id="btn_pantomime" type="button" >Pantomime (60 sec)</button>
+	<p />
+	<div id="app"></div>
+	<p />
+	<button class="btn btn-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
+	<h3 id="reset"></h3>
+	<h2>About</h2>
+	<blockquote class="blockquote"> 
+	Select one of the buttons to get a word from a carefully crafted list of words.
+	This word is then removed from the list and shown to you, while you and all other connected players see
+	a count down running.
+	Note that this web app does not enforce who's turn it is, nor does it count points or check for correct answers.
+	It merely serves to provide words and a Skype, Teams, Zoom, Jitsi or similar session is required to explain words, draw them on a shared whiteboard, and to act in from of a webcam.
+	</blockquote>
+	<p>© <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2020
+	<br> Thanks to 
+	<a href="https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/" target="_blank">CSS-tricks.com</a> for the visual timer,
+	<br>to <a href="https://towardsdatascience.com/build-a-simple-web-app-with-github-pages-flask-and-heroku-bcb2dacc8331" target="_blank">towardsdatascience.com</a> for the general architecture, 
+	<br>to <a href="https://flask-socketio.readthedocs.io/en/latest/" target="_blank">flask-socket.io</a> for the brilliant communication framework, 
+	<br>to <a href="https://devcenter.heroku.com/articles/python-websockets" target="_blank">heroku</a> for hosting the backend,
+	<br>and to <a href="https://github.com/mfgpcm/" target="_blank">github pages</a> for hosting the frontend.
+	</p>
+    </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="{{ url_for('static', filename='js/countdown.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
