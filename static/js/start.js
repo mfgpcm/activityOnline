@@ -1,5 +1,5 @@
-var socket = io.connect('http://localhost:5000');
-//var socket = io.connect('https://activity-backend.herokuapp.com/');
+//var socket = io.connect('http://localhost:5000');
+var socket = io.connect('https://activity-backend.herokuapp.com/');
 
 function createRoom() {
     var roomName = $(" #roomName ").val();
