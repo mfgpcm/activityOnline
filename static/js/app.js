@@ -1,5 +1,5 @@
 //var socket = io.connect('http://localhost:5000');
-var socket = io.connect('https://activity-backend.herokuapp.com/');
+var socket = io.connect('https://activity-online.herokuapp.com/');
 
 function joinRoom() {
     var roomName = window.location.pathname.substring(1);
