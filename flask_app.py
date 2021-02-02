@@ -14,21 +14,20 @@ app = Flask(__name__)
 app.debug = 'DEBUG' in os.environ
 app.config['SECRET_KEY'] = 'adfpoihq34trihu34g9uph'
 cors = CORS(app)
-socketio = SocketIO(app, cors_allowed_origins='*', ping_interval = (25, 25), ping_timeout = 15, ) #, logger=True, engineio_logger=True)
+socketio = SocketIO(app, cors_allowed_origins='*', ping_interval = (25, 25), ping_timeout = 15)#, logger=True, engineio_logger=True)
 
 #TODO get word list from client
-#Add sessions for users to start in individual rooms!
-ds = DataStore()
+ds = {}
 
 @app.route("/")
 def welcome():
     return render_template('index.html', room_name_suggest=generate_slug(2))
-#    return (f"Activity API<br>")
     
 @app.route('/<string:roomName>')
 def enter_room(roomName):
-    print('Joined room', roomName)
-    return(f"Room"+roomName+"<br>")
+    #TODO Add sessions for users to start in individual rooms!
+    ds[roomName] = DataStore()
+    return render_template('room.html', room_name=roomName)
         
 @socketio.on('connect')
 def connect():
@@ -38,34 +37,39 @@ def connect():
 def on_join(data):
     roomName = data['room']
     join_room(roomName)
-    print('Entered the room', roomName)
+    print('Client '+str(request.sid)+' joined the room', roomName)
 
 @socketio.on('leave')
 def on_leave(data):
     roomName = data['room']
     leave_room(roomName)
-    print('left the room.', roomName)
-        
+    print('Client '+str(request.sid)+' left the room', roomName)
+
 @socketio.on('getWord')
 def getWord(data):
     time = data["time"]
-    print('received time: ' + str(time))
-    if ds.isEmpty():
-        emit('resetRequired', broadcast=True)
+    room = data.pop('room')
+    print('received getWord with time: ' + str(time) + ' in room '+room)
+    if ds[room].isEmpty():
+        emit('resetRequired', room=room)
     else:
-        word = ds.getRandomElement()        
-        emit('word', (word, time), broadcast=False)
-        emit('guess', time, broadcast=True, include_self=False)
+        word = ds[room].getRandomElement()
+        emit('guess', time, room=room, include_self=False) #broadcast=True
+        emit('word', (word, time), room=request.sid, namespace='')
 
 @socketio.on('reset')
 def reset():
-    ds.reset()
-    emit('resetPerformed', broadcast=True)
+    roomName = data['room']
+    ds[roomName].reset()
+    emit('resetPerformed', room=roomName)
 
 @socketio.on('disconnect')
 def disconnect():
+    #if room empty clean up ds[roomName]
     print('Client disconnected: '+str(request.sid))
 
 #Not called by heroku
 if __name__ == '__main__':
     socketio.run(app)
+
+    

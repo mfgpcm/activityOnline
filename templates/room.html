@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    
+    <!-- Countdown Timer Default Style -->
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet">     
+
+    <title>Activity Online</title>
+  </head>
+  <body>
+	<div class="jumbotron-narrow text-center">
+	<h2>Activity Online</h2>
+	Share this link <a href="http://localhost:5000/{{ room_name }}">http://localhost:5000/{{ room_name }}</a> with your friends.
+	<p />
+	<h1 id="word">Click to get a word</h1>
+	<p />
+	<button class="btn btn-primary btn-lg" id="btn_explain" type="button" >Explain (15 sec)</button>
+	<button class="btn btn-primary btn-lg" id="btn_draw" type="button" >Draw (30 sec)</button>
+	<button class="btn btn-primary btn-lg" id="btn_pantomime" type="button" >Pantomime (60 sec)</button>
+	<p />
+	<div id="app"></div>
+	<p />
+	<button class="btn btn-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
+	<h3 id="reset"></h3>
+	<p>© <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2020
+	</div>
+	<script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/countdown.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

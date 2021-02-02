@@ -1,22 +1,23 @@
 var socket = io.connect('http://localhost:5000');
-//var socket = io.connect('https://mfgpcm.pythonanywhere.com');
 //var socket = io.connect('https://activity-backend.herokuapp.com/');
 
-function createRoom(guessTime) {
-    var roomName = $(" #roomName ").val();
-  	console.log("Created room " + roomName);
-	socket.emit('join', {room: roomName});
+function joinRoom() {
+    var roomName = window.location.pathname.substring(1);
+    console.log("Joined room " + roomName);
+    socket.emit('join', {room: roomName});
 }
-	
+
 function showNewWord(guessTime) {
-	document.getElementById("reset").innerHTML = "";	
-	socket.emit('getWord', {time: guessTime});
-	console.log("asked for word with time "+guessTime);
+	document.getElementById("reset").innerHTML = "";
+    var roomName = window.location.pathname.substring(1);
+	socket.emit('getWord', {time: guessTime, room: roomName});
+	console.log("asked for word with time "+guessTime+" in room "+roomName);
 }
 
 function handleReset() {
-	socket.emit('reset');
-	console.log("asked for reset");
+    var roomName = window.location.pathname.substring(1);
+	socket.emit('reset', {room: roomName});
+	console.log("asked for reset in room "+roomName);
 }
 
 function disableAllBtn() {	
@@ -61,8 +62,9 @@ socket.on('resetRequired', function() {
 	disableAllBtn();
 });
 
-$(" #btn_room ").click(function() {createRoom();});
 $(" #btn_explain ").click(function() {showNewWord(15);});
 $(" #btn_draw ").click(function() {showNewWord(30);});
 $(" #btn_pantomime ").click(function() {showNewWord(60);});
 $(" #btn_reset ").click(function() {handleReset();});
+
+window.onload = joinRoom;
