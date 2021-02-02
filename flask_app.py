@@ -58,7 +58,7 @@ def getWord(data):
         emit('word', (word, time), room=request.sid, namespace='')
 
 @socketio.on('reset')
-def reset():
+def reset(data):
     roomName = data['room']
     ds[roomName].reset()
     emit('resetPerformed', room=roomName)
