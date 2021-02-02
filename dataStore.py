@@ -24,7 +24,7 @@ class DataStore:
             return element
             
     def reset(self):
-        with open('testWords.csv', newline='') as file:
+        with open('wordLists/2020special.csv', newline='') as file:
                 reader = csv.reader(file)
                 unflattened = list(reader)
                 self.data = list(itertools.chain(*unflattened))
