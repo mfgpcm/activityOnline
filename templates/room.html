@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="author" content="Peter Munk">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     
@@ -13,22 +13,37 @@
 
     <title>Activity Online</title>
   </head>
-  <body>
-	<div class="jumbotron-narrow text-center">
-	<h2>Activity Online</h2>
-	Share this link <a href="https://activity-online.herokuapp.com/{{ room_name }}">https://activity-online.herokuapp.com/{{ room_name }}</a> with your friends.
-	<p />
-	<h1 id="word">Click to get a word</h1>
-	<p />
-	<button class="btn btn-primary btn-lg" id="btn_explain" type="button" >Explain (15 sec)</button>
-	<button class="btn btn-primary btn-lg" id="btn_draw" type="button" >Draw (30 sec)</button>
-	<button class="btn btn-primary btn-lg" id="btn_pantomime" type="button" >Pantomime (60 sec)</button>
-	<p />
-	<div id="app"></div>
-	<p />
-	<button class="btn btn-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
-	<h3 id="reset"></h3>
-	<p>© <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2020
+  <body class="d-flex h-100 text-center">
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    
+     <header class="mb-auto">
+        <div class="container">
+          <h2>Activity Online</h2>
+          <p>Share this link <a href="https://activity-online.herokuapp.com/{{ room_name }}">https://activity-online.herokuapp.com/{{ room_name }}</a> with your friends.</p>
+        </div> 
+    </header>
+    
+     <main class="mb-auto">
+        <div class="container">
+            <h1 id="word">Click to get a word</h1>
+            <button class="btn btn-outline-primary" id="btn_explain" type="button" >Explain (15 sec)</button>
+            <button class="btn btn-outline-primary" id="btn_draw" type="button" >Draw (30 sec)</button>
+            <button class="btn btn-outline-primary" id="btn_pantomime" type="button" >Pantomime (60 sec)</button>
+            <div id="app"></div>
+	            
+            <button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
+
+      	    <h3 id="reset"></h3>
+  	    </div>
+      </main>
+
+      <footer class="footer mt-auto">
+      <div class="container">
+	    © <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2021<br>
+	    <a href="https://github.com/mfgpcm/activityOnline" target="_blank">Source</a>
+	    </div>
+      </footer>
+	    
 	</div>
 	<script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>

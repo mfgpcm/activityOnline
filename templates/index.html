@@ -1,50 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="author" content="Peter Munk">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-
-	<!-- Countdown Timer Default Style -->
-	<link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet">     
-
+	
     <title>Activity Online</title>
   </head>
-  <body>
-	<div class="jumbotron-narrow text-center">
-	<h2>Activity Online</h2>
-	<div class="form-inline">
-        <div class="form-group mb-2">
-            <label for="roomName" class="sr-only">Room name</label>
-            <input type="text" class="form-control" id="roomName" value="{{ room_name_suggest }}">
+  <body class="d-flex h-100 text-center">
+	<div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+          <h1 class="container">Activity Online</h1>
+        </div> 
+    </header>
+    
+     <main class="px-3">
+         <div class="input-group mb-3 flex-nowrap">
+	        <span class="input-group-text">Room name</span>
+            <input type="text" aria-label="Room name" aria-describedby="btn_room" class="form-control" id="roomName" value="{{ room_name_suggest }}">
+            <button class="btn btn-outline-secondary" type="button" id="btn_room">Create</button>
         </div>
-        <button class="btn btn-primary mb-2" id="btn_room" type="button" >Create Room</button>
+        <blockquote class="lead"> 
+        This is a WebApp to play the activity board game online.
+        One player has to describe, to paint, or to act (pantomime) a given phrase and the other players have to find out what that should be within a predefined time.
+        Note that this WebApp does not enforce who's turn it is, nor does it count points or check for correct answers.
+        It merely serves to provide words and a Skype, Teams, Zoom, Jitsi or similar session is required to explain words, draw them on a shared whiteboard, and to act in from of a webcam.
+    	</blockquote>
+      </main>
+
+      <footer class="footer mt-auto">
+      <div class="container">
+        <h3>About</h3>
+	    <p>© <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2021
+	    </p>
+	    <p> Thanks to 
+	    <a href="https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/" target="_blank">CSS-tricks.com</a> for the visual timer,
+	    <br>to <a href="https://towardsdatascience.com/build-a-simple-web-app-with-github-pages-flask-and-heroku-bcb2dacc8331" target="_blank">towardsdatascience.com</a> for the general architecture, 
+	    <br>to <a href="https://flask-socketio.readthedocs.io/en/latest/" target="_blank">flask-socket.io</a> for the brilliant communication framework, 
+	    <br>to <a href="https://devcenter.heroku.com/articles/python-websockets" target="_blank">heroku</a> for running
+	    and to <a href="https://github.com/mfgpcm/activityOnline" target="_blank">github</a> for hosting the source code.
+	    </p>
         </div>
-	<p />
-	<h2>About</h2>
-	<blockquote class="blockquote"> 
-	Select one of the buttons to get a word from a carefully crafted list of words.
-	This word is then removed from the list and shown to you, while you and all other connected players see
-	a count down running.
-	Note that this web app does not enforce who's turn it is, nor does it count points or check for correct answers.
-	It merely serves to provide words and a Skype, Teams, Zoom, Jitsi or similar session is required to explain words, draw them on a shared whiteboard, and to act in from of a webcam.
-	</blockquote>
-	<p>© <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2020-2021
-	</p>
-	<p> Thanks to 
-	<a href="https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/" target="_blank">CSS-tricks.com</a> for the visual timer,
-	<br>to <a href="https://towardsdatascience.com/build-a-simple-web-app-with-github-pages-flask-and-heroku-bcb2dacc8331" target="_blank">towardsdatascience.com</a> for the general architecture, 
-	<br>to <a href="https://flask-socketio.readthedocs.io/en/latest/" target="_blank">flask-socket.io</a> for the brilliant communication framework, 
-	<br>to <a href="https://devcenter.heroku.com/articles/python-websockets" target="_blank">heroku</a> for running
-	and to <a href="https://github.com/mfgpcm/" target="_blank">github</a> for hosting the code.
-	</p>
+
+	    </div>
+      </footer>
     </div>
-	<script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/start.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/start.js') }}"></script>
+        
   </body>
 </html>

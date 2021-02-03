@@ -1,3 +1,19 @@
+//Activity Online - an online guessing game
+//Copyright (C) 2021 Peter Munk
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 //var socket = io.connect('http://localhost:5000');
 var socket = io.connect('https://activity-online.herokuapp.com/');
 
@@ -24,12 +40,14 @@ function disableAllBtn() {
   $(" #btn_explain ").prop('disabled', true);
   $(" #btn_draw ").prop('disabled', true);
   $(" #btn_pantomime ").prop('disabled', true);
+  $(" #btn_reset ").prop('disabled', true);
 }
 
 function enableAllBtn() {	
   $(" #btn_explain ").prop('disabled', false);
   $(" #btn_draw ").prop('disabled', false);
   $(" #btn_pantomime ").prop('disabled', false);
+  $(" #btn_reset ").prop('disabled', false);  
 }
 
 
@@ -60,6 +78,7 @@ socket.on('resetRequired', function() {
 	console.log("Received reset required");
 	document.getElementById("word").innerHTML = "No more words, please reload word list."
 	disableAllBtn();
+	$(" #btn_reset ").prop('disabled', false);
 });
 
 $(" #btn_explain ").click(function() {showNewWord(15);});
