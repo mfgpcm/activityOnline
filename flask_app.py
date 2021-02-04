@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #Activity Online - an online guessing game
 #Copyright (C) 2021 Peter Munk
 
@@ -27,17 +28,26 @@ app.config['SECRET_KEY'] = 'adfpoihq34trihu34g9uph'
 cors = CORS(app)
 socketio = SocketIO(app, cors_allowed_origins='*', ping_interval = (25, 25), ping_timeout = 15)#, logger=True, engineio_logger=True)
 
-#TODO get word list from client
+#not in main for heroku 
 ds = {}
 
 @app.route("/")
 def welcome():
     return render_template('index.html', room_name_suggest=generate_slug(2))
     
-@app.route('/<string:roomName>')
+@app.route('/<string:roomName>', methods=['GET', 'POST'])
 def enter_room(roomName):
-    #TODO Add sessions for users to start in individual rooms!
-    ds[roomName] = DataStore()
+    # handle the POST request
+    if request.method == 'POST':
+        wordListSet = request.form.getlist('wordListSet')
+        print('Client created the room', roomName)
+        print('selected word lists: '+format(wordListSet))
+        ds[roomName] = DataStore(wordListSet)
+    # handle the GET request
+    if not(roomName in ds.keys()):
+        print('Room was not initialized, loading default word list', roomName)
+        #room was not created, so we load default word list
+        ds[roomName] = DataStore(['hobbylark_easy'])
     return render_template('room.html', room_name=roomName)
         
 @socketio.on('connect')
@@ -48,13 +58,13 @@ def connect():
 def on_join(data):
     roomName = data['room']
     join_room(roomName)
-    print('Client '+str(request.sid)+' joined the room', roomName)
+    print('Client '+str(request.sid)+' joined the room '+ roomName)
 
 @socketio.on('leave')
 def on_leave(data):
     roomName = data['room']
     leave_room(roomName)
-    print('Client '+str(request.sid)+' left the room', roomName)
+    print('Client '+str(request.sid)+' left the room '+ roomName)
 
 @socketio.on('getWord')
 def getWord(data):
@@ -76,7 +86,7 @@ def reset(data):
 
 @socketio.on('disconnect')
 def disconnect():
-    #if room empty clean up ds[roomName]
+    #TODO if room empty clean up ds[roomName]
     print('Client disconnected: '+str(request.sid))
 
 #Not called by heroku

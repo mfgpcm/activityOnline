@@ -15,6 +15,5 @@ removing it from the list and sending a guess time to all the clients.
 The word list can be reloaded on request.
 
 ## TODOs:
-* Change the default word list to a more common one
 * Allow users to upload own word lists
 * Allow users to change default times

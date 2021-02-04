@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #Activity Online - an online guessing game
 #Copyright (C) 2021 Peter Munk
 
@@ -21,8 +22,10 @@ import itertools
 class DataStore:
 
     data = []
-
-    def __init__(self):
+    wordListSet = []
+    
+    def __init__(self, wordListSet):
+        self.wordListSet = wordListSet;
         self.reset()
     
     def isEmpty(self):
@@ -38,8 +41,15 @@ class DataStore:
             return element
             
     def reset(self):
-        with open('wordLists/2020special.csv', newline='') as file:
-                reader = csv.reader(file)
-                unflattened = list(reader)
-                self.data = list(itertools.chain(*unflattened))
-                #print(data)
+        for wordList in self.wordListSet:
+            try:
+                with open('wordLists/'+wordList+'.csv', newline='',  encoding='utf-8') as file:
+                    reader = csv.reader(file)
+                    unflattened = list(reader)
+                    self.data.extend(list(itertools.chain(*unflattened)))
+            except IOError:
+                print('wordLists/'+wordList+'.csv does not exist')
+        print(self.data)
+                
+
+                

@@ -19,12 +19,54 @@
     </header>
     
      <main class="px-3">
-         <div class="input-group mb-3 flex-nowrap">
-	        <span class="input-group-text">Room name</span>
-            <input type="text" aria-label="Room name" aria-describedby="btn_room" class="form-control" id="roomName" value="{{ room_name_suggest }}">
-            <button class="btn btn-outline-secondary" type="button" id="btn_room">Create</button>
-        </div>
-        <blockquote class="lead"> 
+		<form action="/{{ room_name_suggest }}" method="POST" id="form">
+		  <fieldset>
+			<!-- todo generate with flask -->
+			<legend>Word set</legend>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_2020special" value="2020special" name="wordListSet" checked>
+				<label class="form-check-label" for="cb_2020special">2020 Special (37)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_easy1" value="hobbylark_easy" name="wordListSet">
+				<label class="form-check-label" for="cb_easy1">Easy 1 (50)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_medium1" value="hobbylark_medium" name="wordListSet">
+				<label class="form-check-label" for="cb_medium1">Medium 1 (50)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_hard1" value="hobbylark_hard" name="wordListSet">
+				<label class="form-check-label" for="cb_hard1">Hard 1 (50)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_easy2" value="thegamegal_easy" name="wordListSet">
+				<label class="form-check-label" for="cb_easy2">Easy 2 (187)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_medium2" value="thegamegal_medium" name="wordListSet">
+				<label class="form-check-label" for="cb_medium2">Medium 2 (278)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_hard2" value="thegamegal_hard" name="wordListSet">
+				<label class="form-check-label" for="cb_hard2">Hard 2 (280)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_ultimate" value="thegamegal_reallyhard" name="wordListSet">
+				<label class="form-check-label" for="cb_ultimate">Ultimate (136)</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="cb_german" value="youngstarswiki" name="wordListSet">
+				<label class="form-check-label" for="cb_german">Deutsch (84)</label>
+			</div>
+		  </fieldset>
+			<div class="input-group mb-3 flex-nowrap">
+				<span class="input-group-text">Room name</span>
+				<input type="text" aria-label="Room name" aria-describedby="btn_room" class="form-control" id="roomName" value="{{ room_name_suggest }}">
+				<button class="btn btn-outline-secondary" type="button" id="btn_room">Create</button>
+			</div>
+		</form>
+        <blockquote class="lead bg-light"> 
         This is a WebApp to play the activity board game online.
         One player has to describe, to paint, or to act (pantomime) a given phrase and the other players have to find out what that should be within a predefined time.
         Note that this WebApp does not enforce who's turn it is, nor does it count points or check for correct answers.
@@ -38,7 +80,10 @@
 	    <p>© <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2021
 	    </p>
 	    <p> Thanks to 
-	    <a href="https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/" target="_blank">CSS-tricks.com</a> for the visual timer,
+		<a href="https://hobbylark.com/party-games/charades-words" target="_blank">hobbylark.com</a>,
+		<a href="https://www.thegamegal.com/2011/10/19/charades-word-list/" target="_blank">thegamegal.com</a>, and
+		<a href="https://www.youngstarswiki.org/es/wiki/activity.html" target="_blank">youngstarswiki.org</a> for the word lists,<br>
+	    to  <a href="https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/" target="_blank">CSS-tricks.com</a> for the visual timer,
 	    <br>to <a href="https://towardsdatascience.com/build-a-simple-web-app-with-github-pages-flask-and-heroku-bcb2dacc8331" target="_blank">towardsdatascience.com</a> for the general architecture, 
 	    <br>to <a href="https://flask-socketio.readthedocs.io/en/latest/" target="_blank">flask-socket.io</a> for the brilliant communication framework, 
 	    <br>to <a href="https://devcenter.heroku.com/articles/python-websockets" target="_blank">heroku</a> for running

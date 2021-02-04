@@ -14,14 +14,14 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-//var socket = io.connect('http://localhost:5000');
-var socket = io.connect('https://activity-online.herokuapp.com/');
-
 function createRoom() {
     var roomName = $(" #roomName ").val();
     console.log("Created room " + roomName);    
-    //window.open("http://localhost:5000/"+roomName,"_self")
-    window.open("https://activity-online.herokuapp.com/"+roomName,"_self")
+	$(" #form ").attr({'action': '/'+roomName});
+	$(" #btn_room ").attr({'type': 'submit'});
+	$(" #btn_room ").submit();
+	//window.open("http://localhost:5000/"+roomName,"_self")
+    //window.open("https://activity-online.herokuapp.com/"+roomName,"_self")
 }
 
 $(" #btn_room ").click(function() {createRoom();});
