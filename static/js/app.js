@@ -51,20 +51,24 @@ function enableAllBtn() {
 }
 
 socket.on('guess', function(time) {
-	console.log("Received guess time:" + time);
-	newLimit(time);
-	startTimer();
-	disableAllBtn();
-	document.getElementById("word").innerHTML = "Guess!";
+	console.log("Received guess time: " + time);
+	if (isStopped()) {
+		newLimit(time);
+		startTimer();
+		disableAllBtn();
+		document.getElementById("word").innerHTML = "Guess!";
+	}
 });
 
 socket.on('word', function(word, time) {
-	console.log("Received word: " + word );
-	console.log("Received time: " + time );
-	newLimit(time);
-	startTimer();
-	disableAllBtn();
-	document.getElementById("word").innerHTML = "Your word is: " + word;
+	if (isStopped()) {
+		console.log("Received word: " + word );
+		console.log("Received time: " + time );
+		newLimit(time);
+		startTimer();
+		disableAllBtn();
+		document.getElementById("word").innerHTML = "Your word is: " + word;
+	}
 });
 
 socket.on('resetPerformed', function() {

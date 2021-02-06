@@ -52,31 +52,35 @@ function newLimit(limit) {
 	TIME_LIMIT = limit;
 	timePassed = 0;
 	timeLeft = TIME_LIMIT;
-	timerInterval = null;
 	setRemainingPathColor();
 }
 
 function onTimesUp() {
   clearInterval(timerInterval);
+  timerInterval = null;
   document.getElementById("bingAudio").play();
   enableAllBtn();
   newLimit(0);
 }
 
-function startTimer() {
-  timerInterval = setInterval(() => {
-    timePassed = timePassed += 1;
-    timeLeft = TIME_LIMIT - timePassed;
-    document.getElementById("base-timer-label").innerHTML = formatTime(
-      timeLeft
-    );
-    setCircleDasharray();
-    setRemainingPathColor(timeLeft);
+function isStopped() {
+	return (timerInterval == null)
+}
 
-    if (timeLeft === 0) {
-      onTimesUp();
-    }
-  }, 1000);
+function startTimer() {
+	timerInterval = setInterval(() => {
+		timePassed = timePassed += 1;
+		timeLeft = TIME_LIMIT - timePassed;
+		document.getElementById("base-timer-label").innerHTML = formatTime(
+		  timeLeft
+		);
+		setCircleDasharray();
+		setRemainingPathColor(timeLeft);
+
+		if (timeLeft === 0) {
+		  onTimesUp();
+		}
+	}, 1000);
 }
 
 function formatTime(time) {
