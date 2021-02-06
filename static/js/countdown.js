@@ -58,6 +58,7 @@ function newLimit(limit) {
 
 function onTimesUp() {
   clearInterval(timerInterval);
+  document.getElementById("bingAudio").play();
   enableAllBtn();
   newLimit(0);
 }

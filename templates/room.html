@@ -14,6 +14,12 @@
     <title>Activity Online</title>
   </head>
   <body class="d-flex h-100 text-center">
+  
+	<audio id="bingAudio" preload="auto">
+		<source src="{{ url_for('static', filename='media/bing.mp3') }}" type="audio/mpeg" >
+		Your browser doesn't support HTML5 audio.
+	</audio>
+  
     <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
     
      <header class="mb-auto">
@@ -41,8 +47,9 @@
       <footer class="footer mt-auto">
       <div class="container">
 	    © <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2021<br>
-		<a href="https://www.buymeacoffee.com/mfgpcm" target="_blank">Buy the developer a coffee</a> or
-	    <a href="https://github.com/mfgpcm/activityOnline" target="_blank">report issues and contribute.</a>
+		<a href="https://www.buymeacoffee.com/mfgpcm" target="_blank">Buy the developer a coffee</a>, 
+	    <a href="https://github.com/mfgpcm/activityOnline" target="_blank">report issues, or contribute.</a><br>
+		Bing sound by <a href="https://www.freesoundslibrary.com/ding-sound-effect/" target="_blank">Spanac</a>
 	    </div>
       </footer>
 	    

@@ -50,7 +50,6 @@ function enableAllBtn() {
   $(" #btn_reset ").prop('disabled', false);  
 }
 
-
 socket.on('guess', function(time) {
 	console.log("Received guess time:" + time);
 	newLimit(time);
