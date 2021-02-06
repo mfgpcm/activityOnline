@@ -52,7 +52,7 @@ class DataStore:
                     self.data.extend(list(itertools.chain(*unflattened)))
             except IOError:
                 print(wordPath+wordList+'.csv does not exist')
-        print(self.data)
+        #print(self.data)
 
     def getAvailableLists():
         availFiles = {}
