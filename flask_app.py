@@ -30,10 +30,11 @@ socketio = SocketIO(app, cors_allowed_origins='*', ping_interval = (25, 25), pin
 
 #not in main for heroku 
 ds = {}
+availableFiles = DataStore.getAvailableLists()
 
 @app.route("/")
 def welcome():
-    return render_template('index.html', room_name_suggest=generate_slug(2))
+    return render_template('index.html', room_name_suggest=generate_slug(2), files=availableFiles)
     
 @app.route('/<string:roomName>', methods=['GET', 'POST'])
 def enter_room(roomName):

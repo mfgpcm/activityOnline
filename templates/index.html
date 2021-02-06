@@ -23,42 +23,12 @@
 		  <fieldset>
 			<!-- todo generate with flask -->
 			<legend>Word set</legend>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_2020special" value="2020special" name="wordListSet" checked>
-				<label class="form-check-label" for="cb_2020special">2020 Special (37)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_easy1" value="hobbylark_easy" name="wordListSet">
-				<label class="form-check-label" for="cb_easy1">Easy 1 (50)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_medium1" value="hobbylark_medium" name="wordListSet">
-				<label class="form-check-label" for="cb_medium1">Medium 1 (50)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_hard1" value="hobbylark_hard" name="wordListSet">
-				<label class="form-check-label" for="cb_hard1">Hard 1 (50)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_easy2" value="thegamegal_easy" name="wordListSet">
-				<label class="form-check-label" for="cb_easy2">Easy 2 (187)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_medium2" value="thegamegal_medium" name="wordListSet">
-				<label class="form-check-label" for="cb_medium2">Medium 2 (278)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_hard2" value="thegamegal_hard" name="wordListSet">
-				<label class="form-check-label" for="cb_hard2">Hard 2 (280)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_ultimate" value="thegamegal_reallyhard" name="wordListSet">
-				<label class="form-check-label" for="cb_ultimate">Ultimate (136)</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="cb_german" value="youngstarswiki" name="wordListSet">
-				<label class="form-check-label" for="cb_german">Deutsch (84)</label>
-			</div>
+			{% for wordFile, lines in files.items() %}
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" id="cb_{{wordFile}}" value="{{wordFile}}" name="wordListSet" {% if wordFile=="Easy 1" %} checked {% endif %}>
+					<label class="form-check-label" for="cb_{{wordFile}}">{{wordFile}} ({{lines}})</label>
+				</div>				
+			{% endfor %}
 		  </fieldset>
 			<div class="input-group mb-3 flex-nowrap">
 				<span class="input-group-text">Room name</span>

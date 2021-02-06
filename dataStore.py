@@ -18,6 +18,9 @@
 import csv
 import random
 import itertools
+import os
+
+wordPath = 'wordLists/'
 
 class DataStore:
 
@@ -43,13 +46,16 @@ class DataStore:
     def reset(self):
         for wordList in self.wordListSet:
             try:
-                with open('wordLists/'+wordList+'.csv', newline='',  encoding='utf-8') as file:
+                with open(wordPath+wordList+'.csv', newline='',  encoding='utf-8') as file:
                     reader = csv.reader(file)
                     unflattened = list(reader)
                     self.data.extend(list(itertools.chain(*unflattened)))
             except IOError:
-                print('wordLists/'+wordList+'.csv does not exist')
+                print(wordPath+wordList+'.csv does not exist')
         print(self.data)
-                
 
-                
+    def getAvailableLists():
+        availFiles = {}
+        for file in os.listdir(wordPath):
+            availFiles[file[:len(file)-4]] = len(open(wordPath+file).readlines(  ))
+        return availFiles
