@@ -48,8 +48,8 @@ def enter_room(roomName):
     if not(roomName in ds.keys()):
         print('Room was not initialized, loading default word list', roomName)
         #room was not created, so we load default word list
-        ds[roomName] = DataStore(['hobbylark_easy'])
-    return render_template('room.html', room_name=roomName)
+        ds[roomName] = DataStore(['Easy 1'])
+    return render_template('room.html', room_name=roomName, wordSets=ds[roomName].getWordLists())
         
 @socketio.on('connect')
 def connect():

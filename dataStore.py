@@ -53,6 +53,9 @@ class DataStore:
             except IOError:
                 print(wordPath+wordList+'.csv does not exist')
         #print(self.data)
+        
+    def getWordLists(self):
+        return self.wordListSet
 
     def getAvailableLists():
         availFiles = {}
