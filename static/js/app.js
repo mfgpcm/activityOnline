@@ -17,6 +17,10 @@
 var socket = io.connect('http://localhost:5000');
 //var socket = io.connect('https://activity-online.herokuapp.com/');
 
+var explainTime = 15;
+var drawTime = 30;
+var pantomimeTime = 60;
+
 function joinRoom() {
     var roomName = window.location.pathname.substring(1);
     console.log("Joined room " + roomName);
@@ -38,15 +42,27 @@ function handleReset() {
 
 function disableAllBtn() {	
   $(" #btn_explain ").prop('disabled', true);
+  $(" #btn_explainPlus ").prop('disabled', true);
+  $(" #btn_explainMinus ").prop('disabled', true);
   $(" #btn_draw ").prop('disabled', true);
+  $(" #btn_drawPlus ").prop('disabled', true);
+  $(" #btn_drawMinus ").prop('disabled', true);
   $(" #btn_pantomime ").prop('disabled', true);
+  $(" #btn_pantomimePlus ").prop('disabled', true);
+  $(" #btn_pantomimeMinus ").prop('disabled', true);
   $(" #btn_reset ").prop('disabled', true);
 }
 
 function enableAllBtn() {	
   $(" #btn_explain ").prop('disabled', false);
+  $(" #btn_explainPlus ").prop('disabled', false);
+  $(" #btn_explainMinus ").prop('disabled', false);
   $(" #btn_draw ").prop('disabled', false);
+  $(" #btn_drawPlus ").prop('disabled', false);
+  $(" #btn_drawMinus ").prop('disabled', false);
   $(" #btn_pantomime ").prop('disabled', false);
+  $(" #btn_pantomimePlus ").prop('disabled', false);
+  $(" #btn_pantomimeMinus ").prop('disabled', false);
   $(" #btn_reset ").prop('disabled', false);  
 }
 
@@ -84,9 +100,40 @@ socket.on('resetRequired', function() {
 	$(" #btn_reset ").prop('disabled', false);
 });
 
-$(" #btn_explain ").click(function() {showNewWord(15);});
-$(" #btn_draw ").click(function() {showNewWord(30);});
-$(" #btn_pantomime ").click(function() {showNewWord(60);});
+$(" #btn_explainPlus ").click(function() {
+	explainTime++;
+	document.getElementById("btn_explain").innerHTML = "Explain ("+explainTime+" sec)";
+});
+$(" #btn_explainMinus ").click(function() {
+	if (explainTime > 1) {
+		explainTime--;
+		document.getElementById("btn_explain").innerHTML = "Explain ("+explainTime+" sec)";
+	}
+});
+$(" #btn_drawPlus ").click(function() {
+	drawTime++;
+	document.getElementById("btn_draw").innerHTML = "Draw ("+drawTime+" sec)";
+});
+$(" #btn_drawMinus ").click(function() {
+	if (drawTime > 1) {
+		drawTime--;
+		document.getElementById("btn_draw").innerHTML = "Draw ("+drawTime+" sec)";
+	}
+});
+$(" #btn_pantomimePlus ").click(function() {
+	pantomimeTime++;
+	document.getElementById("btn_pantomime").innerHTML = "Pantomime ("+pantomimeTime+" sec)";
+});
+$(" #btn_pantomimeMinus ").click(function() {
+	if (pantomimeTime > 1) {
+		pantomimeTime--;
+		document.getElementById("btn_pantomime").innerHTML = "Pantomime ("+pantomimeTime+" sec)";
+	}
+});
+
+$(" #btn_explain ").click(function() {showNewWord(explainTime);});
+$(" #btn_draw ").click(function() {showNewWord(drawTime);});
+$(" #btn_pantomime ").click(function() {showNewWord(pantomimeTime);});
 $(" #btn_reset ").click(function() {handleReset();});
 
 window.onload = joinRoom;

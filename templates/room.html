@@ -38,9 +38,28 @@
      <main class="mb-auto">
         <div class="container">
             <h1 id="word">Click to get a word</h1>
-            <button class="btn btn-outline-primary" id="btn_explain" type="button" >Explain (15 sec)</button>
-            <button class="btn btn-outline-primary" id="btn_draw" type="button" >Draw (30 sec)</button>
+			<div class="btn-group" role="group">
+				<button class="btn btn-outline-primary" id="btn_explain" type="button" >Explain (15 sec)</button>
+				<div class="btn-group-vertical" role="group">
+				  <button type="button" class="btn btn-outline-secondary btn-sm" id="btn_explainPlus">+</button>
+				  <button type="button" class="btn btn-outline-secondary btn-sm" id="btn_explainMinus">-</button>
+				</div>
+			</div>
+			<div class="btn-group" role="group">
+			<button class="btn btn-outline-primary" id="btn_draw" type="button" >Draw (30 sec)</button>
+			<div class="btn-group-vertical" role="group">
+				  <button type="button" class="btn btn-outline-secondary btn-sm" id="btn_drawPlus">+</button>
+				  <button type="button" class="btn btn-outline-secondary btn-sm" id="btn_drawMinus">-</button>
+				</div>
+			</div>
+			<div class="btn-group" role="group">
             <button class="btn btn-outline-primary" id="btn_pantomime" type="button" >Pantomime (60 sec)</button>
+			<div class="btn-group-vertical" role="group">
+				  <button type="button" class="btn btn-outline-secondary btn-sm" id="btn_pantomimePlus">+</button>
+				  <button type="button" class="btn btn-outline-secondary btn-sm" id="btn_pantomimeMinus">-</button>
+				</div>
+			</div>
+			
             <div id="app"></div>
 	            
             <button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
