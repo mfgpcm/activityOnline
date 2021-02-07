@@ -7,7 +7,6 @@
     <meta name="author" content="Peter Munk">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-	
     <title>Activity Online</title>
   </head>
   <body class="d-flex h-100 text-center">
@@ -19,21 +18,34 @@
     </header>
     
      <main class="px-3">
-		<form action="/{{ room_name_suggest }}" method="POST" id="form">
-		  <fieldset>
-			<!-- todo generate with flask -->
-			<legend>Word set</legend>
-			{% for wordFile, lines in files.items() %}
+		<form action="/{{ room_name_suggest }}" method="POST" id="form" class="row mb-3 align-items-center needs-validation" novalidate>
+			<fieldset class="input-group mb-3" >
+				<legend>Select word sets</legend>
+				{% for wordFile, lines in files.items() %}
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="cb_{{wordFile}}" value="{{wordFile}}" name="wordListSet" {% if wordFile=="Easy 1" %} checked {% endif %}>
+						<label class="form-check-label" for="cb_{{wordFile}}">{{wordFile}} ({{lines}})</label>
+					</div>				
+				{% endfor %}
 				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="checkbox" id="cb_{{wordFile}}" value="{{wordFile}}" name="wordListSet" {% if wordFile=="Easy 1" %} checked {% endif %}>
-					<label class="form-check-label" for="cb_{{wordFile}}">{{wordFile}} ({{lines}})</label>
-				</div>				
-			{% endfor %}
-		  </fieldset>
-			<div class="input-group mb-3 flex-nowrap">
+					<input class="form-check-input" type="checkbox" id="cb_own" value="ownWords" name="wordListSet">
+					<label class="form-check-label" for="cb_own">Own Words</label>
+				</div>
+			</fieldset>
+	
+			<div id="textOwnWords" class="input-group mb-3" style="display: none">
+			  <textarea name="ownWordList" class="form-control" aria-label="Your words" placeholder="Your words separated by comma (&quot;,&quot;), semicolon (&quot;;&quot;), or new line (Enter). Spaces do not separate words."></textarea>
+			</div>
+
+			<div class="input-group mb-3 flex-nowrap has-validation">
 				<span class="input-group-text">Room name</span>
-				<input type="text" aria-label="Room name" aria-describedby="btn_room" class="form-control" id="roomName" value="{{ room_name_suggest }}">
-				<button class="btn btn-outline-secondary" type="button" id="btn_room">Create</button>
+				<div class="col">
+					<input type="text" aria-label="Room name" aria-describedby="btn_room" class="form-control" id="roomName" value="{{ room_name_suggest }}" pattern="[A-Za-z0-9-_]*" required>
+					<div class="invalid-feedback">
+						Only use characters, numbers and - or _
+					</div>
+				</div>
+				<button class="btn btn-outline-primary" type="button" id="btn_room">Create Room</button>
 			</div>
 		</form>
         <blockquote class="lead bg-light"> 

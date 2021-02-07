@@ -38,18 +38,29 @@ def welcome():
     
 @app.route('/<string:roomName>', methods=['GET', 'POST'])
 def enter_room(roomName):
+    # TODO return a favicon.ico
     # handle the POST request
     if request.method == 'POST':
+        if roomName in ds:
+            print("Room "+roomName+" already exists, resetting data store.")
         wordListSet = request.form.getlist('wordListSet')
         print('Client created the room', roomName)
         print('selected word lists: '+format(wordListSet))
-        ds[roomName] = DataStore(wordListSet)
+        ds[roomName] = DataStore()
+        if "ownWords" in wordListSet:
+            wordListSet.remove("ownWords")
+            ownWords = request.form['ownWordList']
+            if ownWords:
+                ds[roomName].parseCustomWordList(ownWords)
+                DataStore.saveCustomWordList(ownWords, roomName)
+        ds[roomName].loadWordSets(wordListSet)
     # handle the GET request
-    if not(roomName in ds.keys()):
-        print('Room was not initialized, loading default word list', roomName)
+    if not(roomName in ds):
+        print("Room "+roomName+" was not initialized, loading default word list Easy 1.")
         #room was not created, so we load default word list
-        ds[roomName] = DataStore(['Easy 1'])
-    return render_template('room.html', room_name=roomName, wordSets=ds[roomName].getWordLists())
+        ds[roomName] = DataStore()
+        ds[roomName].loadWordSets(['Easy 1'])
+    return render_template('room.html', room_name=roomName, wordSets=ds[roomName].getWordLists(), ownWords=ds[roomName].usesOwnWord())
         
 @socketio.on('connect')
 def connect():
@@ -77,7 +88,7 @@ def getWord(data):
     else:
         word = ds[room].getRandomElement()
         emit('guess', time, room=room, include_self=False) #broadcast=True
-        emit('word', (word, time), room=request.sid, namespace='')
+        emit('word', (word, time), room=request.sid)
 
 @socketio.on('finish')
 def finish(data):

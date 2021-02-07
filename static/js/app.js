@@ -114,32 +114,32 @@ socket.on('resetRequired', function() {
 });
 
 $(" #btn_explainPlus ").click(function() {
-	explainTime++;
+	explainTime+=5;
 	document.getElementById("btn_explain").innerHTML = "Explain ("+explainTime+" sec)";
 });
 $(" #btn_explainMinus ").click(function() {
 	if (explainTime > minTime) {
-		explainTime--;
+		explainTime-=5;
 		document.getElementById("btn_explain").innerHTML = "Explain ("+explainTime+" sec)";
 	}
 });
 $(" #btn_drawPlus ").click(function() {
-	drawTime++;
+	drawTime+=5;
 	document.getElementById("btn_draw").innerHTML = "Draw ("+drawTime+" sec)";
 });
 $(" #btn_drawMinus ").click(function() {
 	if (drawTime > minTime) {
-		drawTime--;
+		drawTime-=5;
 		document.getElementById("btn_draw").innerHTML = "Draw ("+drawTime+" sec)";
 	}
 });
 $(" #btn_pantomimePlus ").click(function() {
-	pantomimeTime++;
+	pantomimeTime+=5;
 	document.getElementById("btn_pantomime").innerHTML = "Pantomime ("+pantomimeTime+" sec)";
 });
 $(" #btn_pantomimeMinus ").click(function() {
 	if (pantomimeTime > minTime) {
-		pantomimeTime--;
+		pantomimeTime-=5;
 		document.getElementById("btn_pantomime").innerHTML = "Pantomime ("+pantomimeTime+" sec)";
 	}
 });

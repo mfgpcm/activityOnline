@@ -19,17 +19,19 @@ import csv
 import random
 import itertools
 import os
+import datetime 
+import re
+import copy 
 
 wordPath = 'wordLists/'
+uploaded = 'uploadedWordLists/'
 
 class DataStore:
 
     data = []
+    dataOrg = []
     wordListSet = []
-    
-    def __init__(self, wordListSet):
-        self.wordListSet = wordListSet;
-        self.reset()
+    hasOwnWords = False
     
     def isEmpty(self):
         return not self.data
@@ -42,23 +44,49 @@ class DataStore:
             self.data.remove(element)
             #print(element)
             return element
-            
+
     def reset(self):
-        for wordList in self.wordListSet:
-            try:
-                with open(wordPath+wordList+'.csv', newline='',  encoding='utf-8') as file:
-                    reader = csv.reader(file)
-                    unflattened = list(reader)
-                    self.data.extend(list(itertools.chain(*unflattened)))
-            except IOError:
-                print(wordPath+wordList+'.csv does not exist')
-        #print(self.data)
+        self.data = copy.deepcopy(self.dataOrg)
+            
+    def loadWordSets(self, wordListSet):
+        if wordListSet:
+            self.wordListSet = wordListSet
+            self.data = []
+            for wordList in self.wordListSet:
+                try:
+                    with open(wordPath+wordList+'.csv', newline='', encoding='utf-8') as file:
+                        reader = csv.reader(file)
+                        unflattened = list(reader)
+                        self.data.extend(list(itertools.chain(*unflattened)))
+                except IOError:
+                    print(wordPath+wordList+'.csv does not exist')
+            self.dataOrg = copy.deepcopy(self.data)
+            print("word lists loaded: "+format(self.data))
+
+    def parseCustomWordList(self, wordList):
+        self.data = []
+        self.data.extend(re.split('[:,;\n]{1}', wordList))
+        self.dataOrg = copy.deepcopy(self.data)
+        self.hasOwnWords = True
+        print("own word list loaded: "+format(self.data))
         
     def getWordLists(self):
         return self.wordListSet
-
+        
+    def usesOwnWord(self):
+        return self.hasOwnWords
+        
     def getAvailableLists():
         availFiles = {}
         for file in os.listdir(wordPath):
             availFiles[file[:len(file)-4]] = len(open(wordPath+file).readlines(  ))
         return availFiles
+        
+    def saveCustomWordList(wordList, roomName):
+        try:
+            fileName = uploaded+datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-")+roomName+".csv"
+            csv_file = open(fileName, "wt", newline='',  encoding='utf-8')
+            csv_file.write(wordList)
+            csv_file.close()
+        except IOError:
+            print('Could not create file'+fileName)
