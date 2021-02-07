@@ -12,7 +12,7 @@ It is published under GNU Affero General Public License Version 3.
 Players can meet in individual rooms.
 For each room, the app reads a CSV file with words and serves each requesting client a word, 
 removing it from the list and sending a guess time to all the clients.
+Players can also upload individual list of words.
 The word list can be reloaded on request.
-
-## TODOs:
-* Allow users to upload own word lists
+Players can individually change the guessing time limit in steps of 5 with a minimum of 5 sec.
+Only the player that requested and is show a word can stop the timer of all players.
