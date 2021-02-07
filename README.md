@@ -16,4 +16,3 @@ The word list can be reloaded on request.
 
 ## TODOs:
 * Allow users to upload own word lists
-* Allow users to change default times

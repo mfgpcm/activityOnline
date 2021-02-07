@@ -20,6 +20,7 @@ var socket = io.connect('http://localhost:5000');
 var explainTime = 15;
 var drawTime = 30;
 var pantomimeTime = 60;
+let minTime = 5;
 
 function joinRoom() {
     var roomName = window.location.pathname.substring(1);
@@ -105,7 +106,7 @@ $(" #btn_explainPlus ").click(function() {
 	document.getElementById("btn_explain").innerHTML = "Explain ("+explainTime+" sec)";
 });
 $(" #btn_explainMinus ").click(function() {
-	if (explainTime > 1) {
+	if (explainTime > minTime) {
 		explainTime--;
 		document.getElementById("btn_explain").innerHTML = "Explain ("+explainTime+" sec)";
 	}
@@ -115,7 +116,7 @@ $(" #btn_drawPlus ").click(function() {
 	document.getElementById("btn_draw").innerHTML = "Draw ("+drawTime+" sec)";
 });
 $(" #btn_drawMinus ").click(function() {
-	if (drawTime > 1) {
+	if (drawTime > minTime) {
 		drawTime--;
 		document.getElementById("btn_draw").innerHTML = "Draw ("+drawTime+" sec)";
 	}
@@ -125,7 +126,7 @@ $(" #btn_pantomimePlus ").click(function() {
 	document.getElementById("btn_pantomime").innerHTML = "Pantomime ("+pantomimeTime+" sec)";
 });
 $(" #btn_pantomimeMinus ").click(function() {
-	if (pantomimeTime > 1) {
+	if (pantomimeTime > minTime) {
 		pantomimeTime--;
 		document.getElementById("btn_pantomime").innerHTML = "Pantomime ("+pantomimeTime+" sec)";
 	}

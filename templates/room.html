@@ -15,8 +15,8 @@
   </head>
   <body class="d-flex h-100 text-center">
   
-	<audio id="bingAudio" preload="auto">
-		<source src="{{ url_for('static', filename='media/bing.mp3') }}" type="audio/mpeg" >
+	<audio id="beepsAudio" preload="auto">
+		<source src="{{ url_for('static', filename='media/beeps.mp3') }}" type="audio/mpeg" >
 		Your browser doesn't support HTML5 audio.
 	</audio>
   
@@ -61,10 +61,15 @@
 			</div>
 			
             <div id="app"></div>
-	            
-            <button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
-      	    <h3 id="reset"></h3>
 			
+			<button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
+			<h3 id="reset"></h3>
+			<div class="btn-group" role="group">
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="audioSwitch" checked>
+				  <label class="form-check-label" for="audioSwitch">Play beeps</label>
+				</div>
+			</div>
 			
   	    </div>
       </main>
@@ -74,7 +79,7 @@
 	    © <a href="http://www.peter-munk.de" target="_blank">Peter Munk</a> 2021<br>
 		<a href="https://www.buymeacoffee.com/mfgpcm" target="_blank">Buy the developer a coffee</a>, 
 	    <a href="https://github.com/mfgpcm/activityOnline" target="_blank">report issues, or contribute.</a><br>
-		Bing sound by <a href="https://www.freesoundslibrary.com/ding-sound-effect/" target="_blank">Spanac</a>
+		Beeps sound by <a href="https://freesound.org/people/ThompsonMan/sounds/107341/" target="_blank">ThompsonMan</a>
 	    </div>
       </footer>
 	    

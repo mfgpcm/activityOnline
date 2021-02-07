@@ -58,7 +58,6 @@ function newLimit(limit) {
 function onTimesUp() {
   clearInterval(timerInterval);
   timerInterval = null;
-  document.getElementById("bingAudio").play();
   enableAllBtn();
   newLimit(0);
 }
@@ -76,6 +75,12 @@ function startTimer() {
 		);
 		setCircleDasharray();
 		setRemainingPathColor(timeLeft);
+
+		if (timeLeft ===4) {
+			if (document.getElementById("audioSwitch").checked) {
+				document.getElementById("beepsAudio").play();
+			}
+		}
 
 		if (timeLeft === 0) {
 		  onTimesUp();
