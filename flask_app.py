@@ -79,6 +79,11 @@ def getWord(data):
         emit('guess', time, room=room, include_self=False) #broadcast=True
         emit('word', (word, time), room=request.sid, namespace='')
 
+@socketio.on('finish')
+def finish(data):
+    roomName = data['room']
+    emit('finish', room=roomName)
+
 @socketio.on('reset')
 def reset(data):
     roomName = data['room']

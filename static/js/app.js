@@ -41,6 +41,12 @@ function handleReset() {
 	console.log("asked for reset in room "+roomName);
 }
 
+function sendFinish() {
+    var roomName = window.location.pathname.substring(1);
+	socket.emit('finish', {room: roomName});
+	console.log("asked to finish in room "+roomName);
+}
+
 function disableAllBtn() {	
   $(" #btn_explain ").prop('disabled', true);
   $(" #btn_explainPlus ").prop('disabled', true);
@@ -85,7 +91,13 @@ socket.on('word', function(word, time) {
 		startTimer();
 		disableAllBtn();
 		document.getElementById("word").innerHTML = "Your word is: " + word;
+		document.getElementById("btn_finish").style.display='initial';
 	}
+});
+
+socket.on('finish', function() {
+	console.log("Received finish");
+	stopResetTimer();
 });
 
 socket.on('resetPerformed', function() {
@@ -136,5 +148,6 @@ $(" #btn_explain ").click(function() {showNewWord(explainTime);});
 $(" #btn_draw ").click(function() {showNewWord(drawTime);});
 $(" #btn_pantomime ").click(function() {showNewWord(pantomimeTime);});
 $(" #btn_reset ").click(function() {handleReset();});
+$(" #btn_finish ").click(function() {sendFinish();});
 
 window.onload = joinRoom;

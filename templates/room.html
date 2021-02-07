@@ -38,6 +38,7 @@
      <main class="mb-auto">
         <div class="container">
             <h1 id="word">Click to get a word</h1>
+			
 			<div class="btn-group" role="group">
 				<button class="btn btn-outline-primary" id="btn_explain" type="button" >Explain (15 sec)</button>
 				<div class="btn-group-vertical" role="group">
@@ -60,14 +61,38 @@
 				</div>
 			</div>
 			
-            <div id="app"></div>
+			<div class="base-timer">
+			  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+				<g class="base-timer__circle">
+				  <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+				  <path
+					id="base-timer-path-remaining"
+					stroke-dasharray="283"
+					class="base-timer__path-remaining green"
+					d="
+					  M 50, 50
+					  m -45, 0
+					  a 45,45 0 1,0 90,0
+					  a 45,45 0 1,0 -90,0
+					"
+				  ></path>
+				</g>
+			  </svg>
+			  <span class="base-timer__label" id="base-timer-label">0:00</span>
+			</div>
 			
-			<button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
-			<h3 id="reset"></h3>
-			<div class="btn-group" role="group">
-				<div class="form-check form-switch">
-				  <input class="form-check-input" type="checkbox" id="audioSwitch" checked>
-				  <label class="form-check-label" for="audioSwitch">Play beeps</label>
+			<p class="container">
+				<button class="btn btn-outline-primary" id="btn_finish" type="button" style="display: none">End turn</button>
+			</p>
+			
+			<div class="container">
+				<button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
+				<h3 id="reset"></h3>
+				<div class="btn-group" role="group">
+					<div class="form-check form-switch">
+					  <input class="form-check-input" type="checkbox" id="audioSwitch" checked>
+					  <label class="form-check-label" for="audioSwitch">Play beeps</label>
+					</div>
 				</div>
 			</div>
 			
