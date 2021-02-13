@@ -55,7 +55,7 @@ function startTimer() {
 		setCircleDasharray();
 		setRemainingPathColor(timeLeft);
 
-		if (timeLeft === 4) {
+		if (timeLeft === 3) {
 			if (document.getElementById("audioSwitch").checked) {
 				document.getElementById("beepsAudio").play();
 			}

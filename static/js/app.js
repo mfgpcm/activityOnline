@@ -80,6 +80,9 @@ socket.on('guess', function(time) {
 		startTimer();
 		disableAllBtn();
 		document.getElementById("word").innerHTML = "Guess!";
+		document.getElementById("word").classList.add('fw-bold');  
+		document.getElementById("word").classList.add('text-primary');
+		
 	}
 });
 
@@ -91,6 +94,8 @@ socket.on('word', function(word, time) {
 		startTimer();
 		disableAllBtn();
 		document.getElementById("word").innerHTML = "Your word is: " + word;
+		document.getElementById("word").classList.add('fw-bold');  
+		document.getElementById("word").classList.add('text-primary');
 		document.getElementById("btn_finish").style.display='initial';
 	}
 });

@@ -24,7 +24,7 @@
     
      <header class="mb-auto">
         <div class="container">
-          <h2>Activity Online</h2>
+          <h2><a href="https://activity-online.herokuapp.com" class="link-dark">Activity Online</a></h2>
           <p>Share this link <a href="https://activity-online.herokuapp.com/{{ room_name }}">https://activity-online.herokuapp.com/{{ room_name }}</a> with your friends.</p>
 		  <!-- <p>Share this link <a href="http://localhost:5000/{{ room_name }}">http://localhost:5000/{{ room_name }}</a> with your friends.</p> -->
 		  <p>Selected word sets: 
@@ -87,12 +87,32 @@
 			</p>
 			
 			<div class="container">
-				<button class="btn btn-outline-secondary btn-sm" id="btn_reset" type="button" >Reload word list</button>
+				<button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#reloadModal">Reload word list</button>
+                <!-- Modal -->
+                <div class="modal fade" id="reloadModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Reload words?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        This will show used words again to all players. 
+                        Do you want to continue?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" id="btn_reset" data-bs-dismiss="modal">Yes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+				
 				<h3 id="reset"></h3>
 				<div class="btn-group" role="group">
 					<div class="form-check form-switch">
 					  <input class="form-check-input" type="checkbox" id="audioSwitch" checked>
-					  <label class="form-check-label" for="audioSwitch">Play beeps</label>
+					  <label class="form-check-label" for="audioSwitch">Sound notification</label>
 					</div>
 				</div>
 			</div>

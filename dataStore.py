@@ -61,14 +61,14 @@ class DataStore:
                 except IOError:
                     print(wordPath+wordList+'.csv does not exist')
             self.dataOrg = copy.deepcopy(self.data)
-            print("word lists loaded: "+format(self.data))
+            #print("word lists loaded: "+format(self.data))
 
     def parseCustomWordList(self, wordList):
         self.data = []
         self.data.extend(re.split('[:,;\n]{1}', wordList))
         self.dataOrg = copy.deepcopy(self.data)
         self.hasOwnWords = True
-        print("own word list loaded: "+format(self.data))
+        #print("own word list loaded: "+format(self.data))
         
     def getWordLists(self):
         return self.wordListSet

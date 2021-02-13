@@ -20,8 +20,6 @@ function createRoom() {
 	$(" #form ").attr({'action': '/'+roomName});
 	$(" #btn_room ").attr({'type': 'submit'});
 	$(" #btn_room ").submit();
-	//window.open("http://localhost:5000/"+roomName,"_self")
-    //window.open("https://activity-online.herokuapp.com/"+roomName,"_self")
 }
 
 $(" #btn_room ").click(function() {createRoom();});
