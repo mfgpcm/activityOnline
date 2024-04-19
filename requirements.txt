@@ -1,7 +1,7 @@
 bidict==0.22.0
 click==8.1.2
 coolname==1.1.0
-dnspython==1.16.0
+dnspython==2.6.1
 eventlet==0.35.2
 Flask==2.1.1
 Flask-Cors==3.0.10
